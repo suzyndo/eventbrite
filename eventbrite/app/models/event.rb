@@ -25,18 +25,18 @@ class Event < ApplicationRecord
 
     validate :start_date_time
 
-    def multiple_5
+    #def multiple_5
       
-        errors.add(:duration, "La durée doit être un multiple de 5.") unless
-        return self.duration %5 == 0
-        end
+      #  errors.add(:duration, "La durée doit être un multiple de 5.") unless
+       # return self.duration %5 == 0
+       # end
     
-    end
+    #end
     
-      def start_date_time
+      #def start_date_time
         
-          errors.add(:start_date, "Tu ne peux pas créer un évènement dans le passé") unless
-          start_date > Time.now
-          end
-      end
+      #    errors.add(:start_date, "Tu ne peux pas créer un évènement dans le passé") unless
+      #    start_date > Time.now
+      #    end
+      #end
 end
