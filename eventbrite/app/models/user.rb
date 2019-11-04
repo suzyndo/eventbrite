@@ -1,9 +1,10 @@
 class User < ApplicationRecord
       
-  has_many :events
+  has_many :attendances, dependent: :destroy
 
-  has_many :attendances, through: :attendances
+  has_many :events, through: :attendance
 
+  # envoyer un mail de bienvenue à un nouvel utilisateur
   after_create :welcome_send
 
   def welcome_send

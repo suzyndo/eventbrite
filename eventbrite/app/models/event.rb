@@ -3,7 +3,7 @@ class Event < ApplicationRecord
     
   has_many :attendances
 
-  has_many :users, through: :attendances
+  has_many :users, through: :attendance
 
   belongs_to :user
     
@@ -12,31 +12,29 @@ class Event < ApplicationRecord
 
     validates :description, presence: true, length: {minimum: 20, maximum: 1000}
 
-    validates :price, presence: true, numericality: { only_integer: true, greater_than: 1, equal_to: 1000}
+    validates :price, presence: true, numericality: { only_integer: true, greater_than: 0, equal_to: 1000}
 
     validates :location, presence: true
 
-    validates :duration, 
-    presence: true
+    validates :duration, presence: true
 
     validates :start_date, presence: true
 
-    validate :multiple
+    #validate :multiple_of_5?
 
     validate :start_date_time
 
-    #def multiple_5
+    def multiple_of_5?
       
-      #  errors.add(:duration, "La durée doit être un multiple de 5.") unless
-       # return self.duration %5 == 0
-       # end
+       errors.add(:duration, "La durée doit être un multiple de 5.") unless
+       self.duration % 5 == 0
+    end
     
-    #end
     
-      #def start_date_time
+    def start_date_time
         
-      #    errors.add(:start_date, "Tu ne peux pas créer un évènement dans le passé") unless
-      #    start_date > Time.now
-      #    end
-      #end
+        errors.add(:start_date, "Tu ne peux pas créer un évènement dans le passé") unless
+         self.start_date > Time.now
+    
+    end
 end
